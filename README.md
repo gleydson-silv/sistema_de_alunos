@@ -12,8 +12,6 @@ Listagem de todos os alunos cadastrados
 Armazenamento e consulta de dados no banco MySQL
 
 📁 Estrutura do Projeto:
-bash
-Copiar código
 sistema_alunos/
 ├── main.py            
 ├── aluno.py           
@@ -22,7 +20,7 @@ sistema_alunos/
 
 🚀 Como executar:
 Clone o repositório:
-
+https://github.com/gleydson-silv/sistema_de_alunos.git
 
 Instale as dependências:
 pip install -r requirements.txt
