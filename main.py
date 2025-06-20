@@ -4,7 +4,8 @@ def menu():
     while True:
         print("\n1 - Cadastrar aluno")
         print("2 - Listar alunos")
-        print("3 - Sair")
+        print("3 - Atualizar dados")
+        print("4 - Sair")
         opcao = input("Escolha uma opção: ")
 
         if opcao == "1":
@@ -20,6 +21,28 @@ def menu():
             for a in alunos:
                 print(f"ID: {a[0]}, Nome: {a[1]}, Idade: {a[2]}, Curso: {a[3]}")
         elif opcao == "3":
+            try:
+                id_aluno = int(input("Digite o id do aluno: "))
+                aluno_existente = Aluno.buscar_por_id(id_aluno)
+                if not aluno_existente:
+                    print("Aluno com esse ID não foi encontrado. ")
+                    continue
+
+                print("\nAluno atual:")
+                print(f"Nome: {aluno_existente[1]}")
+                print(f"Idade: {aluno_existente[2]}")
+                print(f"Curso: {aluno_existente[3]}\n")
+                
+                nome = input("Digite o novo nome: ")
+                idade = int(input("Digite a nova idade: "))
+                curso = input("Digite o novo curso: ")
+
+                aluno = Aluno(nome, idade, curso)
+                aluno.atualizar_no_banco(id_aluno)
+                print("Os dados do aluno foram atualizados com sucesso. ")
+            except Exception as e:
+                print(f"Erro ao atualizar aluno: {e}")
+        elif opcao == "4":
             break
         else:
             print("Opção invalida!")
