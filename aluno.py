@@ -13,6 +13,22 @@ class Aluno:
         db.executar(sql,valores)
         db.fechar()
 
+    def atualizar_no_banco(self, id_aluno):
+        db = Database()
+        sql = "UPDATE alunos SET nome = %s, idade = %s, curso = %s WHERE id = %s"
+        valores = (self.nome, self.idade, self.curso, id_aluno)
+        db.executar(sql, valores)
+        db.fechar()
+
+    @staticmethod
+    def buscar_por_id(id_aluno):
+        db = Database()
+        sql = "SELECT * FROM alunos WHERE id = %s"
+        db.cursor.execute(sql, (id_aluno,))
+        resultado = db.cursor.fetchone()
+        db.fechar()
+        return resultado
+    
     @staticmethod
     def listar_alunos():
         db = Database()
