@@ -10,9 +10,25 @@ def menu():
         opcao = input("Escolha uma opção: ")
 
         if opcao == "1":
-            nome = input("Nome: ")
-            idade = int(input("Idade: "))
-            curso = input("Curso: ")
+            nome = input("Nome: ").strip()
+            if not nome.replace(" ", "").isalpha():
+                 print("\nO nome deve conter apenas letras.")
+                 continue
+            
+            try:
+                idade = int(input("Idade: "))
+                if idade <= 0:
+                    print("\nA idade informade é inválida. ")
+                    continue
+            except Exception as e:
+                print(f"\nIdade inválida. Digite um número. ")
+                continue
+
+            curso = input("Curso: ").strip()
+            if not curso.replace(" ", "").isalpha():
+                 print("\nO nome do curso deve conter apenas letras.")
+                 continue
+            
             aluno = Aluno(nome, idade, curso)
             aluno.salvar_no_banco()
             print("Aluno cadastrado com sucesso!")
@@ -34,9 +50,24 @@ def menu():
                 print(f"Idade: {aluno_existente[2]}")
                 print(f"Curso: {aluno_existente[3]}\n")
                 
-                nome = input("Digite o novo nome: ")
-                idade = int(input("Digite a nova idade: "))
-                curso = input("Digite o novo curso: ")
+                nome = input("Digite o novo nome: ").strip()
+                if not nome.replace(" ", "").isalpha():
+                    print("\nO nome deve conter apenas letras.")
+                    continue
+
+                try:
+                    idade = int(input("Digite a nova idade: "))
+                    if idade <= 0:
+                        print("\nA idade informade é inválida. ")
+                        continue
+                except Exception as e:
+                    print(f"\nIdade inválida. Digite um número. ")
+                    continue
+
+                curso = input("Curso: ").strip()
+                if not curso.replace(" ", "").isalpha():
+                    print("\nO nome do curso deve conter apenas letras.")
+                    continue
 
                 aluno = Aluno(nome, idade, curso)
                 aluno.atualizar_no_banco(id_aluno)
@@ -54,7 +85,7 @@ def menu():
                     Aluno.deletar_aluno_do_banco(id_aluno)
                     print("Os dados do aluno foram deletados com sucesso.")
             except Exception as e:
-                print("Erro ao excluir aluno: {e}")
+                print(f"Erro ao excluir aluno: {e}")
         elif opcao == "5":
             break
         else:
