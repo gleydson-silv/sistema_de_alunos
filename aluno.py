@@ -36,3 +36,10 @@ class Aluno:
         resultados = db.consultar(sql)
         db.fechar()
         return resultados
+    
+    @staticmethod
+    def deletar_aluno_do_banco(id_aluno):
+        db = Database()
+        sql = "DELETE FROM alunos WHERE id = %s"
+        db.executar(sql, (id_aluno,))
+        db.fechar()

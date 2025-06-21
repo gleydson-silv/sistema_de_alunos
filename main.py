@@ -5,7 +5,8 @@ def menu():
         print("\n1 - Cadastrar aluno")
         print("2 - Listar alunos")
         print("3 - Atualizar dados")
-        print("4 - Sair")
+        print("4 - Deletar dados do aluno")
+        print("5 - Sair")
         opcao = input("Escolha uma opção: ")
 
         if opcao == "1":
@@ -25,7 +26,7 @@ def menu():
                 id_aluno = int(input("Digite o id do aluno: "))
                 aluno_existente = Aluno.buscar_por_id(id_aluno)
                 if not aluno_existente:
-                    print("Aluno com esse ID não foi encontrado. ")
+                    print("Não foi encontrado um aluno com esse ID. ")
                     continue
 
                 print("\nAluno atual:")
@@ -42,7 +43,19 @@ def menu():
                 print("Os dados do aluno foram atualizados com sucesso. ")
             except Exception as e:
                 print(f"Erro ao atualizar aluno: {e}")
+        
         elif opcao == "4":
+            try:
+                id_aluno = int(input("Digite o ID do aluno: "))
+                aluno_existente = Aluno.buscar_por_id(id_aluno)
+                if not aluno_existente:
+                    print("Não foi encontrado um aluno com esse ID")
+                else:
+                    Aluno.deletar_aluno_do_banco(id_aluno)
+                    print("Os dados do aluno foram deletados com sucesso.")
+            except Exception as e:
+                print("Erro ao excluir aluno: {e}")
+        elif opcao == "5":
             break
         else:
             print("Opção invalida!")
