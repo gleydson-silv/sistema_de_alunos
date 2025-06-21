@@ -49,7 +49,7 @@ def menu():
                 id_aluno = int(input("Digite o ID do aluno: "))
                 aluno_existente = Aluno.buscar_por_id(id_aluno)
                 if not aluno_existente:
-                    print("Não foi encontrado um aluno com esse ID")
+                    print("\nNão foi encontrado um aluno com esse ID")
                 else:
                     Aluno.deletar_aluno_do_banco(id_aluno)
                     print("Os dados do aluno foram deletados com sucesso.")
