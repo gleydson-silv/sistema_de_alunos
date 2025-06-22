@@ -43,3 +43,22 @@ class Aluno:
         sql = "DELETE FROM alunos WHERE id = %s"
         db.executar(sql, (id_aluno,))
         db.fechar()
+
+    @staticmethod
+    def buscar_por_nome(parte_nome):
+        db = Database()
+        sql = "SELECT * FROM alunos WHERE nome LIKE %s"
+        valores = (f"%{parte_nome}%",)
+        resultados = db.consultar(sql, valores)
+        db.fechar()
+        return resultados
+    
+    @staticmethod
+    def buscar_por_curso(nome_curso):
+        db = Database()
+        sql = ("SELECT * FROM alunos WHERE curso LIKE %s")
+        valores = (f"%{nome_curso}%",)
+        resultados = db.consultar(sql, valores)
+        db.fechar()
+        return resultados
+    

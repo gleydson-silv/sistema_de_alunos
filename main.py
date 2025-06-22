@@ -6,7 +6,9 @@ def menu():
         print("2 - Listar alunos")
         print("3 - Atualizar dados")
         print("4 - Deletar dados do aluno")
-        print("5 - Sair")
+        print("5 - Buscar aluno por nome")
+        print("6 - Buscar aluno por curso")
+        print("7 - Sair")
         opcao = input("Escolha uma opção: ")
 
         if opcao == "1":
@@ -86,7 +88,32 @@ def menu():
                     print("Os dados do aluno foram deletados com sucesso.")
             except Exception as e:
                 print(f"Erro ao excluir aluno: {e}")
+        
         elif opcao == "5":
+            termo = input("Digite parte do nome do aluno: ").strip()
+            if not termo:
+                print("\nO campo de busca por nome não pode estar vazio. ")
+                continue
+            
+            resultados = Aluno.buscar_por_nome(termo)
+            if resultados:
+                for a in resultados:
+                    print(f"ID:{a[0]}, Nome: {a[1]}, Idade: {a[2]}, Curso: {a[3]}")
+            else:
+                print("Nenhum aluno encontrado com esse nome. ")
+        elif opcao == "6":
+            termo = input("Digite parte do curso do aluno: ").strip()
+            if not termo:
+                print("\nO campo de busca por curso não pode estar vazio. ")
+                continue
+
+            resultados = Aluno.buscar_por_curso(termo)
+            if resultados:
+                for a in resultados:
+                    print(f"ID:{a[0]}, Nome: {a[1]}, Idade: {a[2]}, Curso: {a[3]}")
+            else:
+                print("Nenhum aluno encontrado com esse curso. ")
+        elif opcao == "7":
             break
         else:
             print("Opção invalida!")
