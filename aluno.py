@@ -8,6 +8,13 @@ class Aluno:
 
     def salvar_no_banco(self):
         db = Database()
+        sql_verifica = "SELECT * FROM alunos WHERE nome = %s AND curso = %s "
+        resultado= db.consultar(sql_verifica, (self.nome, self.curso))
+        if resultado:
+            print("Já existe um aluno com esse nome e curso.")
+            db.fechar()
+            return
+        
         sql = "INSERT INTO alunos (nome, idade, curso)   VALUES (%s, %s, %s)"
         valores = (self.nome, self.idade, self.curso)
         db.executar(sql,valores)
