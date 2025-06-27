@@ -1,4 +1,5 @@
 from aluno import Aluno
+from validacoes import idade_valida, texto_valido, entrada_vazia
 
 def menu():
     while True:
@@ -13,22 +14,22 @@ def menu():
 
         if opcao == "1":
             nome = input("Nome: ").strip()
-            if not nome.replace(" ", "").isalpha():
-                 print("\nO nome deve conter apenas letras.")
+            if not texto_valido(nome):
+                 print("\nO nome informado é inválido.")
                  continue
             
             try:
                 idade = int(input("Idade: "))
-                if idade <= 0:
-                    print("\nA idade informade é inválida. ")
+                if not idade_valida(idade):
+                    print("\nA idade informada é inválida. ")
                     continue
             except Exception as e:
                 print(f"\nIdade inválida. Digite um número. ")
                 continue
 
             curso = input("Curso: ").strip()
-            if not curso.replace(" ", "").isalpha():
-                 print("\nO nome do curso deve conter apenas letras.")
+            if not texto_valido(curso):
+                 print("\nO nome do curso informado é inválido.")
                  continue
             
             aluno = Aluno(nome, idade, curso)
@@ -53,22 +54,22 @@ def menu():
                 print(f"Curso: {aluno_existente[3]}\n")
                 
                 nome = input("Digite o novo nome: ").strip()
-                if not nome.replace(" ", "").isalpha():
-                    print("\nO nome deve conter apenas letras.")
+                if not texto_valido(nome):
+                    print("\nO nome informado é inválido.")
                     continue
 
                 try:
                     idade = int(input("Digite a nova idade: "))
-                    if idade <= 0:
-                        print("\nA idade informade é inválida. ")
+                    if not idade_valida(idade):
+                        print("\nA idade informada é inválida. ")
                         continue
                 except Exception as e:
                     print(f"\nIdade inválida. Digite um número. ")
                     continue
 
                 curso = input("Curso: ").strip()
-                if not curso.replace(" ", "").isalpha():
-                    print("\nO nome do curso deve conter apenas letras.")
+                if not texto_valido(curso):
+                    print("\nO nome do curso informado é inválido.")
                     continue
 
                 aluno = Aluno(nome, idade, curso)
