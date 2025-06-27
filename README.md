@@ -1,41 +1,74 @@
-Sistema de Gerenciamento de Alunos
-Este é um projeto simples desenvolvido em Python utilizando os conceitos de Programação Orientada a Objetos (POO) e integração com o banco de dados MySQL.
+# 🎓 Sistema de Cadastro de Alunos
 
-🔧 Tecnologias Utilizadas:
-Python 3.x
-MySQL (MariaDB ou MySQL Server)
-Biblioteca mysql-connector-python
+Este é um sistema de gerenciamento de alunos feito em **Python** com **Programação Orientada a Objetos (POO)**, utilizando **MySQL** para persistência de dados. O projeto conta com funcionalidades de cadastro, listagem, atualização, exclusão e busca de alunos, incluindo validações e normalização do banco com uma tabela separada de cursos.
 
-📋 Funcionalidades:
-Cadastro de alunos com nome, idade e curso
-Listagem de todos os alunos cadastrados
-Armazenamento e consulta de dados no banco MySQL
+---
 
-📁 Estrutura do Projeto:
-sistema_alunos/
-├── main.py            
-├── aluno.py           
-├── database.py        
-└── requirements.txt   
+## 📚 Funcionalidades
 
-🚀 Como executar:
+- ✅ Cadastro de alunos com nome, idade e curso
+- ✅ Validação de entradas (letras, números, campos vazios)
+- ✅ Verificação de alunos duplicados (mesmo nome e curso)
+- ✅ Atualização dos dados do aluno
+- ✅ Exclusão de alunos
+- ✅ Listagem de todos os alunos
+- ✅ Busca de alunos por nome ou por curso
+- ✅ Separação de cursos em tabela específica (`cursos`)
+- ✅ Relacionamento entre tabelas via `curso_id`
+
+---
+
+## 🛠️ Tecnologias utilizadas
+
+- Python 3.11+
+- MySQL 8.0+
+- Biblioteca `mysql-connector-python`
+- Paradigma de Programação Orientada a Objetos (POO)
+
+---
+
+## ⚙️ Estrutura do Projeto
+
+sistema_de_alunos/
+├── aluno.py # Classe Aluno e métodos de acesso ao banco
+├── database.py # Classe Database para conexão e consultas
+├── validacoes.py # Funções auxiliares de validação de entradas
+├── main.py # Menu interativo e execução do programa
+├── requirements.txt # Dependências do projeto
+└── README.md # Documentação do projeto
+
+---
+
+## 💾 Estrutura do Banco de Dados (MySQL)
+
+```sql
+CREATE TABLE cursos (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  nome VARCHAR(100) UNIQUE NOT NULL
+);
+
+CREATE TABLE alunos (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  nome VARCHAR(100) NOT NULL,
+  idade INT NOT NULL,
+  curso_id INT NOT NULL,
+  FOREIGN KEY (curso_id) REFERENCES cursos(id)
+);
+
+🚀 Como executar
 Clone o repositório:
-https://github.com/gleydson-silv/sistema_de_alunos.git
+git clone https://github.com/gleydson-silv/sistema_de_alunos.git
+cd sistema_de_alunos
 
 Instale as dependências:
 pip install -r requirements.txt
 
-Configure seu banco de dados MySQL e crie a tabela:
-CREATE DATABASE escola;
+Configure o banco de dados MySQL:
+Crie o banco chamado escola
 
-USE escola;
+Execute o script SQL acima
 
-CREATE TABLE alunos (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    nome VARCHAR(100),
-    idade INT,
-    curso VARCHAR(100)
-);
-
-Execute o sistema:
+Execute o projeto:
 python main.py
+📌 Licença
+Este projeto está licenciado sob a MIT License – veja o arquivo LICENSE para mais detalhes.
