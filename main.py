@@ -1,5 +1,5 @@
 from aluno import Aluno
-from validacoes import idade_valida, texto_valido, entrada_vazia
+from validacoes import idade_valida, texto_valido
 
 def menu():
     while True:
@@ -38,8 +38,11 @@ def menu():
 
         elif opcao == "2":
             alunos = Aluno.listar_alunos()
-            for a in alunos:
-                print(f"ID: {a[0]}, Nome: {a[1]}, Idade: {a[2]}, Curso: {a[3]}")
+            if alunos:
+                for a in alunos:
+                    print(f"ID: {a[0]}, Nome: {a[1]}, Idade: {a[2]}, Curso: {a[3]}")
+            else:
+                print("\nNenhum aluno resgistrado.")
         elif opcao == "3":
             try:
                 id_aluno = int(input("Digite o id do aluno: "))
